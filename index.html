@@ -1,36 +1,138 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <title>Haifeng Liao</title>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haifeng Liao</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5f7fa;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 60px auto;
+            background: white;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-bottom: 5px;
+            font-size: 42px;
+            color: #1f4e79;
+        }
+
+        h2 {
+            margin-top: 40px;
+            color: #1f4e79;
+            border-bottom: 2px solid #e5e5e5;
+            padding-bottom: 8px;
+        }
+
+        ul {
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .paper {
+            margin-top: 20px;
+            padding: 18px;
+            background: #fafafa;
+            border-left: 5px solid #1f4e79;
+            border-radius: 8px;
+        }
+
+        .paper-title {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .venue {
+            color: #c0392b;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .authors {
+            margin-top: 8px;
+            color: #555;
+        }
+
+        .equal {
+            font-style: italic;
+            color: #777;
+        }
+
+        footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                margin: 20px;
+                padding: 30px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<h1>Haifeng Liao</h1>
+<div class="container">
 
-<h2>Research Interests</h2>
-<p>
-1.Machine Learning for Science2.Computer Vision
-</p>
+    <h1>Haifeng Liao</h1>
 
-<h2>Publications</h2>
+    <h2>Research Interests</h2>
 
-<p>
-<b>AAAI 2027 under review</b>
-<br>
-Find Your Target: Text-Guided Prior Framework for Target-Aware Infrared-Visible Image Fusion and Segmentation
-<br>
-Lingyi Liao*;Haifeng Liao*;Wei Tang(*Equal contribution）
-</p>
+    <ul>
+        <li>Machine Learning for Drug Design</li>
+        <li>Computer Vision</li>
+    </ul>
 
-<h2>Homepage</h2>
+    <h2>Publications</h2>
 
-<p>
-Homepage under construction.
-</p>
+    <div class="paper">
+
+        <div class="venue">
+            AAAI 2027 (Under Review)
+        </div>
+
+        <div class="paper-title">
+            Find Your Target: Text-Guided Prior Framework for Target-Aware Infrared-Visible Image Fusion and Segmentation
+        </div>
+
+        <div class="authors">
+            Lingyi Liao*; Haifeng Liao*; Wei Tang
+        </div>
+
+        <div class="equal">
+            * Equal contribution
+        </div>
+
+    </div>
+
+    <footer>
+        © 2026 Haifeng Liao
+    </footer>
+
+</div>
 
 </body>
-
 </html>
