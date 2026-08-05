@@ -3,411 +3,289 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Haifeng Liao — research in machine learning for drug design and computer vision.">
-  <title>Haifeng Liao — Researcher</title>
+  <meta name="color-scheme" content="dark">
+  <title>Haifeng Liao</title>
   <style>
     :root {
-      --black: #000;
-      --white: #fff;
-      --line: rgba(255, 255, 255, .16);
-      --muted: rgba(255, 255, 255, .62);
-      --page: min(1180px, calc(100vw - 48px));
+      --black: #050505;
+      --white: #f4f4f2;
+      --muted: #969696;
+      --line: #303030;
+      --panel: #0b0b0b;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     html {
       scroll-behavior: smooth;
-      background: var(--black);
     }
 
     body {
       margin: 0;
-      color: var(--white);
-      background: var(--black);
-      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
+      min-height: 100vh;
       overflow-x: hidden;
+      color: var(--white);
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        var(--black);
+      background-size: 48px 48px;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     body::before {
+      content: "";
       position: fixed;
       inset: 0;
       z-index: -1;
-      content: "";
-      opacity: .32;
-      background-image:
-        linear-gradient(var(--line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--line) 1px, transparent 1px);
-      background-size: 72px 72px;
-      mask-image: linear-gradient(to bottom, #000, transparent 78%);
       pointer-events: none;
+      background: radial-gradient(circle at 80% 12%, rgba(255, 255, 255, 0.08), transparent 28rem);
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    a:focus-visible,
-    button:focus-visible {
-      outline: 2px solid var(--white);
-      outline-offset: 5px;
+    a {
+      color: inherit;
     }
 
-    .shell { width: var(--page); margin: 0 auto; }
-
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 20;
-      width: 100%;
-      border-bottom: 1px solid var(--line);
-      background: rgba(0, 0, 0, .84);
-      backdrop-filter: blur(18px);
+    .page {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 26px 0 80px;
     }
 
-    .nav-inner {
+    .topbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      min-height: 72px;
+      min-height: 52px;
+      border-bottom: 1px solid var(--line);
     }
 
-    .monogram {
-      display: grid;
+    .mark {
       width: 34px;
       height: 34px;
       border: 1px solid var(--white);
-      place-items: center;
-      font-family: "SFMono-Regular", Consolas, monospace;
-      font-size: 12px;
-      letter-spacing: -.08em;
+      background: linear-gradient(135deg, transparent 49%, var(--white) 50%, transparent 52%);
     }
 
-    .nav-links { display: flex; gap: 32px; }
-
-    .nav-links a,
-    .eyebrow,
-    .index,
-    .meta,
-    .footer {
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 11px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-    }
-
-    .nav-links a { color: var(--muted); transition: color .2s ease; }
-    .nav-links a:hover { color: var(--white); }
-
-    .hero {
-      display: grid;
-      align-content: end;
-      min-height: 100svh;
-      padding: 150px 0 72px;
-    }
-
-    .status {
+    .scholar-link {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 28px;
-      color: var(--muted);
-    }
-
-    .status::before {
-      width: 7px;
-      height: 7px;
-      border: 1px solid var(--white);
-      border-radius: 50%;
-      content: "";
-      animation: pulse 2.4s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { background: transparent; }
-      50% { background: var(--white); }
-    }
-
-    h1 {
-      max-width: 1080px;
-      margin: 0;
-      font-size: clamp(64px, 11.8vw, 176px);
-      font-weight: 500;
-      line-height: .82;
-      letter-spacing: -.075em;
-    }
-
-    .hero-bottom {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: end;
-      margin-top: 72px;
-    }
-
-    .hero-copy {
-      max-width: 590px;
-      margin: 0;
-      font-size: clamp(20px, 2.3vw, 34px);
-      line-height: 1.25;
-      letter-spacing: -.035em;
-    }
-
-    .scroll-cue { justify-self: end; color: var(--muted); }
-    .scroll-cue::after { margin-left: 12px; content: "↓"; color: var(--white); }
-
-    .section {
-      padding: 124px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .section-grid {
-      display: grid;
-      grid-template-columns: minmax(150px, .48fr) 1.52fr;
-      gap: 64px;
-    }
-
-    .index { color: var(--muted); }
-
-    h2 {
-      margin: 0 0 64px;
-      font-size: clamp(40px, 6vw, 84px);
-      font-weight: 500;
-      line-height: 1;
-      letter-spacing: -.06em;
-    }
-
-    .interest-list { border-top: 1px solid var(--white); }
-
-    .interest {
-      display: grid;
-      grid-template-columns: 74px 1fr auto;
-      align-items: center;
-      gap: 20px;
-      min-height: 118px;
-      border-bottom: 1px solid var(--line);
-      transition: padding .25s ease, background .25s ease;
-    }
-
-    .interest:hover { padding: 0 20px; background: var(--white); color: var(--black); }
-
-    .interest-number,
-    .interest-code {
-      font-family: "SFMono-Regular", Consolas, monospace;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
       font-size: 11px;
-      letter-spacing: .08em;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      text-transform: uppercase;
     }
 
-    .interest-name {
-      font-size: clamp(22px, 3vw, 42px);
-      line-height: 1.15;
-      letter-spacing: -.035em;
+    .scholar-link::after {
+      content: "↗";
+      font-size: 14px;
+      transition: transform 180ms ease;
     }
 
-    .collaborator-card {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      min-height: 270px;
-      padding: 32px;
-      border: 1px solid var(--white);
-      transition: background .25s ease, color .25s ease;
-    }
-
-    .collaborator-card:hover { background: var(--white); color: var(--black); }
-
-    .collaborator-name {
-      font-size: clamp(42px, 7vw, 92px);
-      line-height: .94;
-      letter-spacing: -.06em;
-    }
-
-    .node {
-      display: grid;
-      width: 42px;
-      height: 42px;
-      border: 1px solid currentColor;
-      border-radius: 50%;
-      place-items: center;
-      font-family: monospace;
-    }
-
-    .publication {
-      display: grid;
-      grid-template-columns: 120px 1fr 38px;
-      gap: 32px;
-      padding: 34px 0;
-      border-top: 1px solid var(--white);
-      border-bottom: 1px solid var(--line);
-    }
-
-    .publication-title {
-      max-width: 850px;
-      margin: 0;
-      font-size: clamp(26px, 3.7vw, 52px);
-      font-weight: 400;
-      line-height: 1.1;
-      letter-spacing: -.045em;
-    }
-
-    .authors { margin: 26px 0 10px; color: var(--muted); }
-    .authors strong { color: var(--white); font-weight: 500; }
-    .note { margin: 0; color: var(--muted); font-size: 13px; }
-
-    .arrow {
-      display: grid;
-      width: 38px;
-      height: 38px;
-      border: 1px solid var(--line);
-      border-radius: 50%;
-      place-items: center;
-      transition: background .2s ease, color .2s ease, transform .2s ease;
-    }
-
-    .publication:hover .arrow {
-      color: var(--black);
-      background: var(--white);
+    .scholar-link:hover::after,
+    .scholar-link:focus-visible::after {
       transform: translate(3px, -3px);
     }
 
-    .footer {
+    .scholar-link:focus-visible {
+      outline: 1px solid var(--white);
+      outline-offset: 6px;
+    }
+
+    .hero {
       display: flex;
-      justify-content: space-between;
-      padding: 32px 0;
-      border-top: 1px solid var(--line);
+      align-items: end;
+      min-height: 54vh;
+      padding: 72px 0 42px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 850px;
+      font-size: clamp(4.25rem, 11vw, 9.5rem);
+      font-weight: 600;
+      line-height: 0.82;
+      letter-spacing: -0.075em;
+    }
+
+    h1 span {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--white);
+    }
+
+    .section {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      gap: 48px;
+      padding: 52px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-label {
+      margin: 4px 0 0;
       color: var(--muted);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
 
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition: opacity .7s ease, transform .7s ease;
+    .interest-list {
+      display: grid;
+      gap: 0;
     }
 
-    .reveal.visible { opacity: 1; transform: none; }
+    .interest {
+      margin: 0;
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+      font-size: clamp(1.35rem, 3vw, 2.55rem);
+      line-height: 1.18;
+      letter-spacing: -0.035em;
+    }
 
-    @media (max-width: 760px) {
-      :root { --page: calc(100vw - 32px); }
-      body::before { background-size: 42px 42px; }
-      .nav-links { gap: 16px; }
-      .nav-links a:nth-child(2) { display: none; }
-      .hero { padding-bottom: 42px; }
-      .hero-bottom,
-      .section-grid { grid-template-columns: 1fr; gap: 36px; }
-      .scroll-cue { justify-self: start; }
-      .section { padding: 86px 0; }
-      h2 { margin-bottom: 42px; }
-      .interest { grid-template-columns: 42px 1fr; padding: 22px 0; }
-      .interest-code { display: none; }
-      .publication { grid-template-columns: 1fr 38px; gap: 18px; }
-      .publication .meta { grid-column: 1 / -1; }
-      .collaborator-card { min-height: 220px; padding: 24px; }
-      .footer { gap: 24px; }
+    .interest:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .collaborator {
+      margin: 0;
+      font-size: clamp(2rem, 4.5vw, 4.25rem);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .publication {
+      position: relative;
+      padding: 28px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: rgba(11, 11, 11, 0.86);
+    }
+
+    .publication::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 72px;
+      height: 1px;
+      background: var(--white);
+    }
+
+    .publication-type {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .publication-title {
+      margin: 0;
+      max-width: 900px;
+      font-size: clamp(1.6rem, 3.6vw, 3.25rem);
+      font-weight: 500;
+      line-height: 1.08;
+      letter-spacing: -0.045em;
+    }
+
+    .authors {
+      margin: 32px 0 0;
+      color: #c9c9c9;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .contribution {
+      display: inline-block;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 720px) {
+      .page {
+        width: min(100% - 28px, 1120px);
+        padding-bottom: 42px;
+      }
+
+      .hero {
+        min-height: 48vh;
+        padding: 60px 0 32px;
+      }
+
+      h1 {
+        font-size: clamp(3.7rem, 20vw, 6.75rem);
+      }
+
+      .section {
+        grid-template-columns: 1fr;
+        gap: 26px;
+        padding: 38px 0;
+      }
+
+      .publication {
+        padding: 22px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-      .reveal { opacity: 1; transform: none; }
+      html {
+        scroll-behavior: auto;
+      }
+
+      .scholar-link::after {
+        transition: none;
+      }
     }
   </style>
 </head>
 <body>
-  <header class="nav">
-    <div class="shell nav-inner">
-      <a class="monogram" href="#top" aria-label="Back to top">HL</a>
-      <nav class="nav-links" aria-label="Primary navigation">
-        <a href="#research">Research</a>
-        <a href="#collaborators">Network</a>
-        <a href="#publications">Publications</a>
-      </nav>
-    </div>
-  </header>
+  <main class="page">
+    <header class="topbar">
+      <div class="mark" aria-hidden="true"></div>
+      <a class="scholar-link" href="https://scholar.google.com/citations?user=ngv4iiUAAAAJ&amp;hl=zh-CN" target="_blank" rel="noreferrer">Google Scholar</a>
+    </header>
 
-  <main id="top">
-    <section class="shell hero" aria-labelledby="hero-title">
-      <div>
-        <p class="eyebrow status">Researcher / Machine Intelligence</p>
-        <h1 id="hero-title">Haifeng<br>Liao</h1>
-      </div>
-      <div class="hero-bottom">
-        <p class="hero-copy">Exploring learning systems for molecular discovery and visual perception.</p>
-        <a class="eyebrow scroll-cue" href="#research">Explore research</a>
+    <section class="hero" aria-labelledby="name">
+      <h1 id="name">Haifeng <span>Liao</span></h1>
+    </section>
+
+    <section class="section" aria-labelledby="research-interests">
+      <h2 class="section-label" id="research-interests">Research Interests</h2>
+      <div class="interest-list">
+        <p class="interest">Machine Learning for Drug Design</p>
+        <p class="interest">Computer Vision</p>
       </div>
     </section>
 
-    <section class="section" id="research" aria-labelledby="research-title">
-      <div class="shell section-grid reveal">
-        <p class="index">01 / Research</p>
-        <div>
-          <h2 id="research-title">Research<br>interests</h2>
-          <div class="interest-list">
-            <div class="interest">
-              <span class="interest-number">01</span>
-              <span class="interest-name">Machine Learning for Drug Design</span>
-              <span class="interest-code">ML × MOLECULES</span>
-            </div>
-            <div class="interest">
-              <span class="interest-number">02</span>
-              <span class="interest-name">Computer Vision</span>
-              <span class="interest-code">VISION × AI</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <section class="section" aria-labelledby="collaborators">
+      <h2 class="section-label" id="collaborators">Collaborators</h2>
+      <p class="collaborator">Wei Tang</p>
     </section>
 
-    <section class="section" id="collaborators" aria-labelledby="collaborator-title">
-      <div class="shell section-grid reveal">
-        <p class="index">02 / Network</p>
-        <div>
-          <h2 id="collaborator-title">Collaborators</h2>
-          <div class="collaborator-card">
-            <span class="collaborator-name">Wei Tang</span>
-            <span class="node" aria-hidden="true">↗</span>
-          </div>
-        </div>
-      </div>
+    <section class="section" aria-labelledby="publications">
+      <h2 class="section-label" id="publications">Publications</h2>
+      <article class="publication">
+        <p class="publication-type">arXiv / Preprint</p>
+        <h3 class="publication-title">Find Your Target: Text-Guided Prior Framework for Target-Aware Infrared-Visible Image Fusion and Segmentation</h3>
+        <p class="authors">Lingyi Liao* · Haifeng Liao* · Wei Tang</p>
+        <p class="contribution">* Equal contribution</p>
+      </article>
     </section>
 
-    <section class="section" id="publications" aria-labelledby="publication-title">
-      <div class="shell section-grid reveal">
-        <p class="index">03 / Selected work</p>
-        <div>
-          <h2 id="publication-title">Publications</h2>
-          <a class="publication" href="https://arxiv.org/search/?query=Find+Your+Target%3A+Text-Guided+Prior+Framework+for+Target-Aware+Infrared-Visible+Image+Fusion+and+Segmentation&amp;searchtype=title" target="_blank" rel="noopener noreferrer" aria-label="Find this paper on arXiv">
-            <span class="meta">arXiv / Preprint</span>
-            <div>
-              <h3 class="publication-title">Find Your Target: Text-Guided Prior Framework for Target-Aware Infrared-Visible Image Fusion and Segmentation</h3>
-              <p class="authors">Lingyi Liao* · <strong>Haifeng Liao*</strong> · Wei Tang</p>
-              <p class="note">* Equal contribution</p>
-            </div>
-            <span class="arrow" aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </div>
-    </section>
   </main>
-
-  <footer class="shell footer">
-    <span>© <span id="year">2026</span> Haifeng Liao</span>
-    <a href="#top">Back to top ↑</a>
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
-  </script>
 </body>
 </html>
