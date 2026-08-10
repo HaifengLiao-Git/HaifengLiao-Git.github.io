@@ -1,18 +1,17 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+<html lang="zh-CN" data-language="zh">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="dark">
-  <title>廖海峰</title>
+  <title>廖海峰 Haifeng Liao</title>
   <style>
     :root {
-      --ink: #f5f5f2;
-      --paper: #050505;
-      --muted: #a2a2a0;
-      --line: rgba(255, 255, 255, 0.22);
-      --grid-line: rgba(255, 255, 255, 0.105);
-      --max-width: 860px;
+      color-scheme: dark;
+      --bg: #050505;
+      --panel: #0a0a0a;
+      --text: #f2f2f2;
+      --muted: #929292;
+      --line: #272727;
     }
 
     * {
@@ -20,439 +19,264 @@
     }
 
     html {
-      scroll-behavior: smooth;
+      background: var(--bg);
     }
 
     body {
       margin: 0;
-      min-width: 320px;
-      color: var(--ink);
-      background-color: var(--paper);
-      background-image:
-        linear-gradient(var(--grid-line) 1px, transparent 1px),
-        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        var(--bg);
       background-size: 32px 32px;
-      background-position: -1px -1px;
-      font-family: Inter, "Helvetica Neue", Arial, "PingFang SC",
-        "Microsoft YaHei", sans-serif;
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
     }
 
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 12px;
-      z-index: 0;
-      pointer-events: none;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025);
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font: inherit;
-    }
-
-    .shell {
-      position: relative;
-      z-index: 1;
-      width: min(calc(100% - 40px), var(--max-width));
+    main {
+      width: min(100% - 32px, 720px);
       margin: 0 auto;
-      min-height: 100vh;
-      padding: 18px 0 44px;
+      padding: 24px 0 40px;
     }
 
     .language-switch {
       display: flex;
       justify-content: flex-end;
       gap: 4px;
-      margin-bottom: clamp(44px, 7vw, 72px);
+      margin-bottom: 16px;
     }
 
     .language-switch button {
-      display: grid;
-      place-items: center;
-      min-width: 48px;
-      height: 36px;
+      min-width: 42px;
+      height: 30px;
+      padding: 0 10px;
       border: 1px solid var(--line);
-      border-radius: 999px;
+      border-radius: 0;
       color: var(--muted);
-      background: rgba(5, 5, 5, 0.82);
+      background: var(--panel);
+      font: 600 11px/1 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      letter-spacing: 0.08em;
       cursor: pointer;
-      transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
     }
 
     .language-switch button:hover,
     .language-switch button:focus-visible {
-      color: var(--ink);
-      border-color: var(--ink);
+      color: var(--text);
+      border-color: #777;
       outline: none;
     }
 
-    .language-switch button[aria-selected="true"] {
-      color: var(--paper);
-      background: var(--ink);
-      border-color: var(--ink);
+    .language-switch button[aria-pressed="true"] {
+      color: var(--bg);
+      background: var(--text);
+      border-color: var(--text);
     }
 
-    .page[hidden] {
-      display: none;
-    }
-
-    .page {
-      animation: reveal 320ms ease both;
-    }
-
-    @keyframes reveal {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .identity {
-      padding-bottom: clamp(48px, 7vw, 68px);
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(46px, 8vw, 76px);
-      font-weight: 500;
-      line-height: 0.92;
-      letter-spacing: -0.075em;
-    }
-
-    .page[data-lang="zh"] h1 {
-      letter-spacing: -0.08em;
-    }
-
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 24px;
-      margin-top: 24px;
-    }
-
-    .text-link {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding-bottom: 4px;
-      font-size: 14px;
-      letter-spacing: 0.02em;
-    }
-
-    .text-link::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      height: 1px;
-      background: var(--ink);
-      transform-origin: right;
-      transition: transform 180ms ease;
-    }
-
-    .text-link:hover::after,
-    .text-link:focus-visible::after {
-      transform: scaleX(0.25);
-    }
-
-    .text-link:focus-visible {
-      outline: 1px solid var(--ink);
-      outline-offset: 5px;
-    }
-
-    .arrow {
-      font-size: 13px;
-      transform: translateY(-1px);
-    }
-
-    .section {
-      display: grid;
-      grid-template-columns: 128px minmax(0, 1fr);
-      gap: 24px;
-      padding: 20px 0 clamp(38px, 5.5vw, 52px);
+    section {
+      padding: 15px 0 16px;
       border-top: 1px solid var(--line);
     }
 
-    .section-label {
-      margin: 0;
+    section:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    .label {
+      margin: 0 0 7px;
       color: var(--muted);
-      font-size: 10px;
-      font-weight: 500;
-      line-height: 1.5;
-      letter-spacing: 0.18em;
+      font: 600 10px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
     }
 
-    .section-body {
-      min-width: 0;
-    }
-
-    .line {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 28px;
+    .name {
       margin: 0;
-      font-size: clamp(17px, 2.25vw, 21px);
-      line-height: 1.4;
-      letter-spacing: -0.025em;
+      font-size: clamp(27px, 6vw, 42px);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
     }
 
-    .line + .line {
-      margin-top: 4px;
-    }
-
-    .date {
-      flex: 0 0 auto;
-      color: var(--muted);
-      font-size: 13px;
-      letter-spacing: 0.03em;
+    p {
+      margin: 0;
+      line-height: 1.55;
     }
 
     .stack {
       display: grid;
       gap: 5px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
     }
 
-    .stack li {
-      font-size: clamp(18px, 2.6vw, 23px);
-      line-height: 1.4;
-      letter-spacing: -0.03em;
+    a {
+      width: fit-content;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid #555;
+      transition: border-color 160ms ease, color 160ms ease;
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: #fff;
+      border-color: #fff;
+      outline: none;
+    }
+
+    .entry {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: baseline;
+    }
+
+    .year,
+    .source,
+    .note {
+      color: var(--muted);
+      font: 500 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     }
 
     .publication {
       display: grid;
-      gap: 16px;
+      gap: 7px;
     }
 
-    .venue {
-      margin: 0;
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 11px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-    }
-
-    .paper-title {
-      max-width: 680px;
-      margin: 0;
-      font-size: clamp(21px, 3vw, 28px);
-      font-weight: 450;
-      line-height: 1.28;
-      letter-spacing: -0.035em;
-      text-wrap: balance;
-    }
-
-    .page .uniform-type,
-    .page .uniform-type .line,
-    .page .uniform-type li {
-      font-family: Inter, "Helvetica Neue", Arial, "PingFang SC",
-        "Microsoft YaHei", sans-serif;
-      font-size: clamp(18px, 2.4vw, 22px);
-      font-weight: 400;
+    .publication-title {
+      max-width: 660px;
+      font-size: 17px;
+      font-weight: 600;
       line-height: 1.45;
-      letter-spacing: -0.02em;
     }
 
-    .authors,
-    .note {
-      margin: 0;
+    .authors {
       font-size: 14px;
-      line-height: 1.65;
     }
 
-    .note {
-      color: var(--muted);
-      font-size: 12px;
+    [data-lang] {
+      display: none;
     }
 
-    @media (max-width: 640px) {
-      .shell {
-        width: min(calc(100% - 32px), var(--max-width));
-        padding-top: 14px;
+    html[data-language="zh"] [data-lang="zh"],
+    html[data-language="en"] [data-lang="en"] {
+      display: revert;
+    }
+
+    @media (max-width: 520px) {
+      main {
+        width: min(100% - 24px, 720px);
+        padding-top: 16px;
       }
 
-      .language-switch {
-        margin-bottom: 40px;
-      }
-
-      .identity {
-        padding-bottom: 46px;
-      }
-
-      .links {
-        display: grid;
-        justify-items: start;
-        margin-top: 22px;
-      }
-
-      .section {
+      .entry {
         grid-template-columns: 1fr;
-        gap: 15px;
-        padding-bottom: 34px;
-      }
-
-      .line {
-        display: grid;
-        gap: 4px;
-      }
-
-      .date {
-        order: 2;
+        gap: 2px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+      * {
+        transition: none !important;
       }
     }
   </style>
 </head>
 <body>
-  <main class="shell">
-    <nav class="language-switch" role="tablist" aria-label="语言 / Language">
-      <button type="button" role="tab" id="tab-zh" aria-controls="page-zh" aria-selected="true" data-target="zh">中</button>
-      <button type="button" role="tab" id="tab-en" aria-controls="page-en" aria-selected="false" data-target="en">EN</button>
+  <main>
+    <nav class="language-switch" aria-label="语言 / Language">
+      <button type="button" data-switch="zh" aria-pressed="true">中</button>
+      <button type="button" data-switch="en" aria-pressed="false">EN</button>
     </nav>
 
-    <article class="page" id="page-zh" role="tabpanel" aria-labelledby="tab-zh" data-lang="zh">
-      <header class="identity">
-        <h1>廖海峰</h1>
-        <div class="links">
-          <a class="text-link" href="https://eview.net/profile?id=%7EHaifeng_Liao3" target="_blank" rel="noopener noreferrer">开放评审 <span class="arrow" aria-hidden="true">↗</span></a>
-          <a class="text-link" href="https://scholar.google.com/citations?user=ngv4iiUAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer">谷歌学术 <span class="arrow" aria-hidden="true">↗</span></a>
-        </div>
-      </header>
+    <section>
+      <p class="label" data-lang="zh">姓名</p>
+      <p class="label" data-lang="en">Name</p>
+      <p class="name" data-lang="zh">廖海峰</p>
+      <p class="name" data-lang="en">Haifeng Liao</p>
+    </section>
 
-      <section class="section">
-        <h2 class="section-label">经历</h2>
-        <div class="section-body uniform-type">
-          <p class="line"><span>同济大学</span><span class="date">2022—2026</span></p>
-          <p class="line"><span>本科生</span></p>
-        </div>
-      </section>
+    <section>
+      <p class="label" data-lang="zh">链接</p>
+      <p class="label" data-lang="en">Links</p>
+      <div class="stack" data-lang="zh">
+        <a href="https://openreview.net/profile?id=%7EHaifeng_Liao3" target="_blank" rel="noreferrer">开放评审</a>
+        <a href="https://scholar.google.com/citations?user=ngv4iiUAAAAJ&amp;hl=zh-CN" target="_blank" rel="noreferrer">谷歌学术</a>
+      </div>
+      <div class="stack" data-lang="en">
+        <a href="https://openreview.net/profile?id=%7EHaifeng_Liao3" target="_blank" rel="noreferrer">Open Review</a>
+        <a href="https://scholar.google.com/citations?user=ngv4iiUAAAAJ&amp;hl=zh-CN" target="_blank" rel="noreferrer">Google Scholar</a>
+      </div>
+    </section>
 
-      <section class="section">
-        <h2 class="section-label">研究方向</h2>
-        <div class="section-body">
-          <ul class="stack uniform-type">
-            <li>机器学习用于药物发现</li>
-            <li>计算机视觉</li>
-          </ul>
-        </div>
-      </section>
+    <section>
+      <p class="label" data-lang="zh">经历</p>
+      <p class="label" data-lang="en">Experience</p>
+      <div class="entry" data-lang="zh">
+        <p>同济大学本科生</p>
+        <p class="year">2022–2026</p>
+      </div>
+      <div class="entry" data-lang="en">
+        <p>Tongji University Undergraduate</p>
+        <p class="year">2022–2026</p>
+      </div>
+    </section>
 
-      <section class="section">
-        <h2 class="section-label">合作者</h2>
-        <div class="section-body">
-          <p class="line uniform-type"><span>唐伟</span></p>
-        </div>
-      </section>
+    <section>
+      <p class="label" data-lang="zh">研究方向</p>
+      <p class="label" data-lang="en">Research Interests</p>
+      <div class="stack" data-lang="zh">
+        <p>机器学习用于药物发现</p>
+        <p>计算机视觉</p>
+      </div>
+      <div class="stack" data-lang="en">
+        <p>Machine Learning for Drug Design</p>
+        <p>Computer Vision</p>
+      </div>
+    </section>
 
-      <section class="section">
-        <h2 class="section-label">出版物</h2>
-        <div class="section-body publication">
-          <p class="venue">arXiv</p>
-          <h3 class="paper-title uniform-type">寻找你的目标：面向目标感知红外与可见光图像融合和分割的文本引导先验框架</h3>
-          <div>
-            <p class="authors">廖玲艺*　廖海峰*　唐伟#</p>
-            <p class="note">*同等贡献　#通讯作者</p>
-          </div>
-        </div>
-      </section>
-    </article>
+    <section>
+      <p class="label" data-lang="zh">合作者</p>
+      <p class="label" data-lang="en">Collaborator</p>
+      <p data-lang="zh">唐伟</p>
+      <p data-lang="en">Wei Tang</p>
+    </section>
 
-    <article class="page" id="page-en" role="tabpanel" aria-labelledby="tab-en" data-lang="en" lang="en" hidden>
-      <header class="identity">
-        <h1>Haifeng Liao</h1>
-        <div class="links">
-          <a class="text-link" href="https://openreview.net/profile?id=%7EHaifeng_Liao3" target="_blank" rel="noopener noreferrer">Open Review <span class="arrow" aria-hidden="true">↗</span></a>
-          <a class="text-link" href="https://scholar.google.com/citations?user=ngv4iiUAAAAJ&amp;hl=zh-CN" target="_blank" rel="noopener noreferrer">Google Scholar <span class="arrow" aria-hidden="true">↗</span></a>
-        </div>
-      </header>
-
-      <section class="section">
-        <h2 class="section-label">Experience</h2>
-        <div class="section-body uniform-type">
-          <p class="line"><span>Tongji University</span><span class="date">2022—2026</span></p>
-          <p class="line"><span>Undergraduate</span></p>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2 class="section-label">Research</h2>
-        <div class="section-body">
-          <ul class="stack uniform-type">
-            <li>Machine Learning for Drug Design</li>
-            <li>Computer Vision</li>
-          </ul>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2 class="section-label">Collaborator</h2>
-        <div class="section-body">
-          <p class="line uniform-type"><span>Wei Tang</span></p>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2 class="section-label">Publication</h2>
-        <div class="section-body publication">
-          <p class="venue">arXiv</p>
-          <h3 class="paper-title uniform-type">Find Your Target: Text-Guided Prior Framework for Target-Aware Infrared-Visible Image Fusion and Segmentation</h3>
-          <div>
-            <p class="authors">Lingyi Liao*　Haifeng Liao*　Wei Tang#</p>
-            <p class="note">*Equal contribution　#Corresponding author</p>
-          </div>
-        </div>
-      </section>
-    </article>
+    <section>
+      <p class="label" data-lang="zh">出版物</p>
+      <p class="label" data-lang="en">Publication</p>
+      <article class="publication" data-lang="zh">
+        <p class="source">arXiv</p>
+        <p class="publication-title">寻找你的目标：面向目标感知红外与可见光图像融合和分割的文本引导先验框架</p>
+        <p class="authors">廖玲艺* 廖海峰* 唐伟#</p>
+        <p class="note">*同等贡献&nbsp;&nbsp;#通讯作者</p>
+      </article>
+      <article class="publication" data-lang="en">
+        <p class="source">arXiv</p>
+        <p class="publication-title">Find Your Target: Text-Guided Prior Framework for Target-Aware Infrared-Visible Image Fusion and Segmentation</p>
+        <p class="authors">Lingyi Liao* Haifeng Liao* Wei Tang#</p>
+        <p class="note">*Equal contribution&nbsp;&nbsp;#Corresponding author</p>
+      </article>
+    </section>
   </main>
 
   <script>
-    const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
-    const pages = Array.from(document.querySelectorAll('[role="tabpanel"]'));
+    const root = document.documentElement;
+    const switches = document.querySelectorAll('[data-switch]');
 
-    function switchLanguage(language) {
-      tabs.forEach((tab) => {
-        const active = tab.dataset.target === language;
-        tab.setAttribute('aria-selected', String(active));
-        tab.tabIndex = active ? 0 : -1;
+    function setLanguage(language) {
+      root.dataset.language = language;
+      root.lang = language === 'zh' ? 'zh-CN' : 'en';
+      switches.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.switch === language));
       });
-
-      pages.forEach((page) => {
-        page.hidden = page.dataset.lang !== language;
-      });
-
-      document.documentElement.lang = language === 'zh' ? 'zh-CN' : 'en';
     }
 
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => switchLanguage(tab.dataset.target));
-      tab.addEventListener('keydown', (event) => {
-        if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-        event.preventDefault();
-        const direction = event.key === 'ArrowRight' ? 1 : -1;
-        const next = tabs[(index + direction + tabs.length) % tabs.length];
-        switchLanguage(next.dataset.target);
-        next.focus();
-      });
+    switches.forEach((button) => {
+      button.addEventListener('click', () => setLanguage(button.dataset.switch));
     });
+
+    setLanguage('zh');
   </script>
 </body>
 </html>
