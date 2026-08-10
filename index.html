@@ -1,17 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="color-scheme" content="dark">
-  <title>Haifeng Liao</title>
+  <title>廖海峰</title>
+  <meta name="description" content="廖海峰（Haifeng Liao），同济大学本科生（2022-2026），研究方向为用于药物设计的机器学习与计算机视觉。">
   <style>
     :root {
-      --black: #050505;
-      --white: #f2f2f0;
-      --muted: #a1a1a1;
-      --line: #333333;
-      --panel: #0b0b0b;
+      --black: #060708;
+      --white: #f4f4f1;
+      --text: #dedfda;
+      --muted: #92969c;
+      --line: #2d3035;
+      --panel: #0d0f12;
+      --sans: Inter, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
     }
 
     * {
@@ -32,7 +36,7 @@
         linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
         var(--black);
       background-size: 48px 48px;
-      font-family: Inter, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: var(--sans);
     }
 
     body::before {
@@ -68,9 +72,10 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 12px;
-      letter-spacing: 0.08em;
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
     }
 
     .language-switch span {
@@ -87,6 +92,7 @@
 
     .language-button[aria-pressed="true"] {
       color: var(--white);
+      font-weight: 600;
     }
 
     .language-button:focus-visible,
@@ -110,22 +116,27 @@
       color: var(--white);
       font-size: clamp(2.25rem, 8vw, 6.75rem);
       font-weight: 600;
-      line-height: 0.94;
-      letter-spacing: -0.065em;
+      line-height: 0.96;
+      letter-spacing: -0.055em;
       white-space: nowrap;
     }
 
     .hero-details {
-      display: grid;
-      gap: 12px;
       margin-top: 22px;
     }
 
-    .identity {
+    .experience,
+    .interest,
+    .collaborator {
+      color: var(--text);
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 450;
+      line-height: 1.4;
+      letter-spacing: -0.012em;
+    }
+
+    .experience {
       margin: 0;
-      color: #d0d0d0;
-      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-      line-height: 1.5;
     }
 
     .profile-links {
@@ -138,10 +149,17 @@
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 12px;
-      letter-spacing: 0.04em;
+      color: var(--text);
+      font-size: 0.86rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
       text-decoration: none;
+      transition: color 180ms ease;
+    }
+
+    .profile-link:hover,
+    .profile-link:focus-visible {
+      color: var(--white);
     }
 
     .profile-link::after {
@@ -165,13 +183,13 @@
 
     .section-label {
       margin: 4px 0 0;
-      color: var(--muted);
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.13em;
-      line-height: 1.6;
-      text-transform: uppercase;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      line-height: 1.45;
+      text-transform: none;
     }
 
     .interest-list {
@@ -182,9 +200,6 @@
       margin: 0;
       padding: 12px 0;
       border-top: 1px solid var(--line);
-      font-size: clamp(1.2rem, 2.5vw, 1.95rem);
-      line-height: 1.25;
-      letter-spacing: -0.025em;
     }
 
     .interest:last-child {
@@ -193,10 +208,6 @@
 
     .collaborator {
       margin: 0;
-      font-size: clamp(1.75rem, 3.5vw, 3rem);
-      font-weight: 500;
-      line-height: 1.1;
-      letter-spacing: -0.035em;
     }
 
     .publication {
@@ -204,7 +215,7 @@
       padding: 22px;
       overflow: hidden;
       border: 1px solid var(--line);
-      background: rgba(11, 11, 11, 0.86);
+      background: var(--panel);
     }
 
     .publication::before {
@@ -220,33 +231,34 @@
     .publication-type {
       margin: 0 0 16px;
       color: var(--muted);
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 12px;
-      letter-spacing: 0.12em;
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.06em;
     }
 
     .publication-title {
       margin: 0;
       max-width: 860px;
-      font-size: clamp(1.35rem, 3vw, 2.4rem);
-      font-weight: 500;
-      line-height: 1.18;
-      letter-spacing: -0.035em;
+      color: var(--white);
+      font-size: clamp(1.25rem, 2.5vw, 2rem);
+      font-weight: 550;
+      line-height: 1.3;
+      letter-spacing: -0.022em;
     }
 
     .authors {
       margin: 22px 0 0;
-      color: #cccccc;
-      font-size: 15px;
-      line-height: 1.7;
+      color: var(--text);
+      font-size: 0.95rem;
+      line-height: 1.65;
     }
 
     .contribution {
       margin: 9px 0 0;
       color: var(--muted);
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 12px;
-      letter-spacing: 0.04em;
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.02em;
     }
 
     @media (max-width: 700px) {
@@ -287,88 +299,99 @@
       .profile-link::after {
         transition: none;
       }
+
+      .profile-link {
+        transition: none;
+      }
     }
   </style>
 </head>
-<body data-language="en">
+<body data-language="zh">
   <main class="page">
     <header class="topbar">
       <div class="language-switch" aria-label="Language">
-        <button class="language-button" type="button" data-set-language="en" aria-pressed="true">EN</button>
+        <button class="language-button" type="button" data-set-language="zh" aria-pressed="true">中文</button>
         <span aria-hidden="true">/</span>
-        <button class="language-button" type="button" data-set-language="zh" aria-pressed="false">中文</button>
+        <button class="language-button" type="button" data-set-language="en" aria-pressed="false">EN</button>
       </div>
     </header>
 
     <section class="hero" aria-labelledby="name">
       <h1 class="name" id="name">
-        <span class="lang-en">Haifeng Liao</span>
         <span class="lang-zh">廖海峰</span>
+        <span class="lang-en">Haifeng Liao</span>
       </h1>
       <div class="hero-details">
-        <p class="identity">
-          <span class="lang-en">Tongji University undergraduate</span>
-          <span class="lang-zh">同济大学本科生</span>
-        </p>
         <div class="profile-links">
           <a class="profile-link" href="https://openreview.net/profile?id=%7EHaifeng_Liao3" target="_blank" rel="noreferrer">
-            <span class="lang-en">OpenReview</span>
             <span class="lang-zh">开放评审</span>
+            <span class="lang-en">OpenReview</span>
           </a>
           <a class="profile-link" href="https://scholar.google.com/citations?user=ngv4iiUAAAAJ&amp;hl=zh-CN" target="_blank" rel="noreferrer">
-            <span class="lang-en">Google Scholar</span>
             <span class="lang-zh">谷歌学术</span>
+            <span class="lang-en">Google Scholar</span>
           </a>
         </div>
       </div>
     </section>
 
+    <section class="section" aria-labelledby="experience">
+      <h2 class="section-label" id="experience">
+        <span class="lang-zh">经历</span>
+        <span class="lang-en">Experience</span>
+      </h2>
+      <p class="experience">
+        <span class="lang-zh">同济大学本科生 2022-2026</span>
+        <span class="lang-en">Tongji University undergraduate 2022-2026</span>
+      </p>
+    </section>
+
     <section class="section" aria-labelledby="research-interests">
       <h2 class="section-label" id="research-interests">
-        <span class="lang-en">Research Interests</span>
         <span class="lang-zh">研究方向</span>
+        <span class="lang-en">Research Interests</span>
       </h2>
       <div class="interest-list">
         <p class="interest">
-          <span class="lang-en">Machine Learning for Drug Design</span>
           <span class="lang-zh">用于药物设计的机器学习</span>
+          <span class="lang-en">Machine Learning for Drug Design</span>
         </p>
         <p class="interest">
-          <span class="lang-en">Computer Vision</span>
           <span class="lang-zh">计算机视觉</span>
+          <span class="lang-en">Computer Vision</span>
         </p>
       </div>
     </section>
 
     <section class="section" aria-labelledby="collaborators">
       <h2 class="section-label" id="collaborators">
-        <span class="lang-en">Collaborators</span>
         <span class="lang-zh">合作者</span>
+        <span class="lang-en">Collaborators</span>
       </h2>
       <p class="collaborator">
-        <span class="lang-en">Wei Tang</span>
         <span class="lang-zh">唐伟</span>
+        <span class="lang-en">Wei Tang</span>
       </p>
     </section>
 
     <section class="section" aria-labelledby="publications">
       <h2 class="section-label" id="publications">
-        <span class="lang-en">Publications</span>
         <span class="lang-zh">论文</span>
+        <span class="lang-en">Publications</span>
       </h2>
       <article class="publication">
         <p class="publication-type">arXiv</p>
         <h3 class="publication-title">
-          <span class="lang-en">Find Your Target: Text-Guided Prior Framework for Target-Aware Infrared-Visible Image Fusion and Segmentation</span>
           <span class="lang-zh">寻找你的目标：面向目标感知红外与可见光图像融合和分割的文本引导先验框架</span>
+          <span class="lang-en">Find Your Target: Text-Guided Prior Framework for Target-Aware Infrared-Visible Image Fusion and Segmentation</span>
         </h3>
         <p class="authors">
-          <span class="lang-en">Lingyi Liao* · Haifeng Liao* · Wei Tang</span>
           <span class="lang-zh">廖玲艺* · 廖海峰* · 唐伟</span>
+          <span class="lang-en">Lingyi Liao* · Haifeng Liao* · Wei Tang</span>
         </p>
         <p class="contribution">
-          <span class="lang-en">* Equal contribution</span>
           <span class="lang-zh">* 同等贡献</span>
+          <span class="lang-en">* Equal contribution</span>
         </p>
       </article>
     </section>
