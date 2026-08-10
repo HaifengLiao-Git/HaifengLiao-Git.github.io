@@ -8,9 +8,9 @@
   <style>
     :root {
       --black: #050505;
-      --white: #f4f4f2;
-      --muted: #969696;
-      --line: #303030;
+      --white: #f2f2f0;
+      --muted: #a1a1a1;
+      --line: #333333;
       --panel: #0b0b0b;
     }
 
@@ -28,11 +28,11 @@
       overflow-x: hidden;
       color: var(--white);
       background:
-        linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
         var(--black);
       background-size: 48px 48px;
-      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Inter, "Noto Sans SC", "PingFang SC", "Microsoft YaHei", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     body::before {
@@ -41,89 +41,125 @@
       inset: 0;
       z-index: -1;
       pointer-events: none;
-      background: radial-gradient(circle at 80% 12%, rgba(255, 255, 255, 0.08), transparent 28rem);
+      background: radial-gradient(circle at 78% 10%, rgba(255, 255, 255, 0.075), transparent 28rem);
     }
 
+    button,
     a {
       color: inherit;
+      font: inherit;
     }
 
     .page {
-      width: min(1120px, calc(100% - 48px));
+      width: min(1080px, calc(100% - 48px));
       margin: 0 auto;
-      padding: 26px 0 80px;
+      padding: 18px 0 48px;
     }
 
     .topbar {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      min-height: 52px;
+      justify-content: flex-end;
+      min-height: 42px;
       border-bottom: 1px solid var(--line);
     }
 
-    .mark {
-      width: 34px;
-      height: 34px;
-      border: 1px solid var(--white);
-      background: linear-gradient(135deg, transparent 49%, var(--white) 50%, transparent 52%);
-    }
-
-    .scholar-link {
+    .language-switch {
       display: inline-flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 11px;
-      letter-spacing: 0.12em;
-      text-decoration: none;
-      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.08em;
     }
 
-    .scholar-link::after {
+    .language-switch span {
+      color: var(--line);
+    }
+
+    .language-button {
+      padding: 8px 2px;
+      border: 0;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .language-button[aria-pressed="true"] {
+      color: var(--white);
+    }
+
+    .language-button:focus-visible,
+    .profile-link:focus-visible {
+      outline: 1px solid var(--white);
+      outline-offset: 4px;
+    }
+
+    [data-language="en"] .lang-zh,
+    [data-language="zh"] .lang-en {
+      display: none;
+    }
+
+    .hero {
+      padding: 46px 0 30px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .name {
+      margin: 0;
+      color: var(--white);
+      font-size: clamp(2.25rem, 8vw, 6.75rem);
+      font-weight: 600;
+      line-height: 0.94;
+      letter-spacing: -0.065em;
+      white-space: nowrap;
+    }
+
+    .hero-details {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .identity {
+      margin: 0;
+      color: #d0d0d0;
+      font-size: clamp(0.95rem, 1.5vw, 1.1rem);
+      line-height: 1.5;
+    }
+
+    .profile-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 22px;
+    }
+
+    .profile-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+
+    .profile-link::after {
       content: "↗";
       font-size: 14px;
       transition: transform 180ms ease;
     }
 
-    .scholar-link:hover::after,
-    .scholar-link:focus-visible::after {
+    .profile-link:hover::after,
+    .profile-link:focus-visible::after {
       transform: translate(3px, -3px);
-    }
-
-    .scholar-link:focus-visible {
-      outline: 1px solid var(--white);
-      outline-offset: 6px;
-    }
-
-    .hero {
-      display: flex;
-      align-items: end;
-      min-height: 54vh;
-      padding: 72px 0 42px;
-      border-bottom: 1px solid var(--line);
-    }
-
-    h1 {
-      margin: 0;
-      max-width: 850px;
-      font-size: clamp(4.25rem, 11vw, 9.5rem);
-      font-weight: 600;
-      line-height: 0.82;
-      letter-spacing: -0.075em;
-    }
-
-    h1 span {
-      display: block;
-      color: transparent;
-      -webkit-text-stroke: 1px var(--white);
     }
 
     .section {
       display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
-      gap: 48px;
-      padding: 52px 0;
+      grid-template-columns: 190px minmax(0, 1fr);
+      gap: 36px;
+      padding: 30px 0;
       border-bottom: 1px solid var(--line);
     }
 
@@ -131,24 +167,24 @@
       margin: 4px 0 0;
       color: var(--muted);
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 10px;
+      font-size: 12px;
       font-weight: 500;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.13em;
+      line-height: 1.6;
       text-transform: uppercase;
     }
 
     .interest-list {
       display: grid;
-      gap: 0;
     }
 
     .interest {
       margin: 0;
-      padding: 18px 0;
+      padding: 12px 0;
       border-top: 1px solid var(--line);
-      font-size: clamp(1.35rem, 3vw, 2.55rem);
-      line-height: 1.18;
-      letter-spacing: -0.035em;
+      font-size: clamp(1.2rem, 2.5vw, 1.95rem);
+      line-height: 1.25;
+      letter-spacing: -0.025em;
     }
 
     .interest:last-child {
@@ -157,15 +193,15 @@
 
     .collaborator {
       margin: 0;
-      font-size: clamp(2rem, 4.5vw, 4.25rem);
+      font-size: clamp(1.75rem, 3.5vw, 3rem);
       font-weight: 500;
-      line-height: 1;
-      letter-spacing: -0.05em;
+      line-height: 1.1;
+      letter-spacing: -0.035em;
     }
 
     .publication {
       position: relative;
-      padding: 28px;
+      padding: 22px;
       overflow: hidden;
       border: 1px solid var(--line);
       background: rgba(11, 11, 11, 0.86);
@@ -176,68 +212,70 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 72px;
+      width: 68px;
       height: 1px;
       background: var(--white);
     }
 
     .publication-type {
-      margin: 0 0 24px;
+      margin: 0 0 16px;
       color: var(--muted);
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 10px;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.12em;
     }
 
     .publication-title {
       margin: 0;
-      max-width: 900px;
-      font-size: clamp(1.6rem, 3.6vw, 3.25rem);
+      max-width: 860px;
+      font-size: clamp(1.35rem, 3vw, 2.4rem);
       font-weight: 500;
-      line-height: 1.08;
-      letter-spacing: -0.045em;
+      line-height: 1.18;
+      letter-spacing: -0.035em;
     }
 
     .authors {
-      margin: 32px 0 0;
-      color: #c9c9c9;
-      font-size: 14px;
-      line-height: 1.8;
+      margin: 22px 0 0;
+      color: #cccccc;
+      font-size: 15px;
+      line-height: 1.7;
     }
 
     .contribution {
-      display: inline-block;
-      margin: 10px 0 0;
+      margin: 9px 0 0;
       color: var(--muted);
       font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-      font-size: 10px;
-      letter-spacing: 0.08em;
+      font-size: 12px;
+      letter-spacing: 0.04em;
     }
 
-    @media (max-width: 720px) {
+    @media (max-width: 700px) {
       .page {
-        width: min(100% - 28px, 1120px);
-        padding-bottom: 42px;
+        width: min(100% - 28px, 1080px);
+        padding-bottom: 32px;
       }
 
       .hero {
-        min-height: 48vh;
-        padding: 60px 0 32px;
+        padding: 38px 0 26px;
       }
 
-      h1 {
-        font-size: clamp(3.7rem, 20vw, 6.75rem);
+      .name {
+        font-size: clamp(2.15rem, 10.2vw, 4.5rem);
+      }
+
+      .hero-details {
+        gap: 11px;
+        margin-top: 18px;
       }
 
       .section {
         grid-template-columns: 1fr;
-        gap: 26px;
-        padding: 38px 0;
+        gap: 18px;
+        padding: 26px 0;
       }
 
       .publication {
-        padding: 22px;
+        padding: 19px;
       }
     }
 
@@ -246,46 +284,111 @@
         scroll-behavior: auto;
       }
 
-      .scholar-link::after {
+      .profile-link::after {
         transition: none;
       }
     }
   </style>
 </head>
-<body>
+<body data-language="en">
   <main class="page">
     <header class="topbar">
-      <div class="mark" aria-hidden="true"></div>
-      <a class="scholar-link" href="https://scholar.google.com/citations?user=ngv4iiUAAAAJ&amp;hl=zh-CN" target="_blank" rel="noreferrer">Google Scholar</a>
+      <div class="language-switch" aria-label="Language">
+        <button class="language-button" type="button" data-set-language="en" aria-pressed="true">EN</button>
+        <span aria-hidden="true">/</span>
+        <button class="language-button" type="button" data-set-language="zh" aria-pressed="false">中文</button>
+      </div>
     </header>
 
     <section class="hero" aria-labelledby="name">
-      <h1 id="name">Haifeng <span>Liao</span></h1>
+      <h1 class="name" id="name">
+        <span class="lang-en">Haifeng Liao</span>
+        <span class="lang-zh">廖海峰</span>
+      </h1>
+      <div class="hero-details">
+        <p class="identity">
+          <span class="lang-en">Tongji University undergraduate</span>
+          <span class="lang-zh">同济大学本科生</span>
+        </p>
+        <div class="profile-links">
+          <a class="profile-link" href="https://openreview.net/profile?id=%7EHaifeng_Liao3" target="_blank" rel="noreferrer">
+            <span class="lang-en">OpenReview</span>
+            <span class="lang-zh">开放评审</span>
+          </a>
+          <a class="profile-link" href="https://scholar.google.com/citations?user=ngv4iiUAAAAJ&amp;hl=zh-CN" target="_blank" rel="noreferrer">
+            <span class="lang-en">Google Scholar</span>
+            <span class="lang-zh">谷歌学术</span>
+          </a>
+        </div>
+      </div>
     </section>
 
     <section class="section" aria-labelledby="research-interests">
-      <h2 class="section-label" id="research-interests">Research Interests</h2>
+      <h2 class="section-label" id="research-interests">
+        <span class="lang-en">Research Interests</span>
+        <span class="lang-zh">研究方向</span>
+      </h2>
       <div class="interest-list">
-        <p class="interest">Machine Learning for Drug Design</p>
-        <p class="interest">Computer Vision</p>
+        <p class="interest">
+          <span class="lang-en">Machine Learning for Drug Design</span>
+          <span class="lang-zh">用于药物设计的机器学习</span>
+        </p>
+        <p class="interest">
+          <span class="lang-en">Computer Vision</span>
+          <span class="lang-zh">计算机视觉</span>
+        </p>
       </div>
     </section>
 
     <section class="section" aria-labelledby="collaborators">
-      <h2 class="section-label" id="collaborators">Collaborators</h2>
-      <p class="collaborator">Wei Tang</p>
+      <h2 class="section-label" id="collaborators">
+        <span class="lang-en">Collaborators</span>
+        <span class="lang-zh">合作者</span>
+      </h2>
+      <p class="collaborator">
+        <span class="lang-en">Wei Tang</span>
+        <span class="lang-zh">唐伟</span>
+      </p>
     </section>
 
     <section class="section" aria-labelledby="publications">
-      <h2 class="section-label" id="publications">Publications</h2>
+      <h2 class="section-label" id="publications">
+        <span class="lang-en">Publications</span>
+        <span class="lang-zh">论文</span>
+      </h2>
       <article class="publication">
-        <p class="publication-type">arXiv / Preprint</p>
-        <h3 class="publication-title">Find Your Target: Text-Guided Prior Framework for Target-Aware Infrared-Visible Image Fusion and Segmentation</h3>
-        <p class="authors">Lingyi Liao* · Haifeng Liao* · Wei Tang</p>
-        <p class="contribution">* Equal contribution</p>
+        <p class="publication-type">arXiv</p>
+        <h3 class="publication-title">
+          <span class="lang-en">Find Your Target: Text-Guided Prior Framework for Target-Aware Infrared-Visible Image Fusion and Segmentation</span>
+          <span class="lang-zh">寻找你的目标：面向目标感知红外与可见光图像融合和分割的文本引导先验框架</span>
+        </h3>
+        <p class="authors">
+          <span class="lang-en">Lingyi Liao* · Haifeng Liao* · Wei Tang</span>
+          <span class="lang-zh">廖玲艺* · 廖海峰* · 唐伟</span>
+        </p>
+        <p class="contribution">
+          <span class="lang-en">* Equal contribution</span>
+          <span class="lang-zh">* 同等贡献</span>
+        </p>
       </article>
     </section>
-
   </main>
+
+  <script>
+    const languageButtons = document.querySelectorAll("[data-set-language]");
+
+    function setLanguage(language) {
+      document.body.dataset.language = language;
+      document.documentElement.lang = language === "zh" ? "zh-CN" : "en";
+
+      languageButtons.forEach((button) => {
+        button.setAttribute("aria-pressed", String(button.dataset.setLanguage === language));
+      });
+    }
+
+    languageButtons.forEach((button) => {
+      button.addEventListener("click", () => setLanguage(button.dataset.setLanguage));
+    });
+  </script>
 </body>
 </html>
